@@ -1,0 +1,9 @@
+gensim==4.0.1
+wordcloud==1.8.1
+jieba==0.42.1
+pandas==1.2.3
+pyecharts==1.9.0
+requests==2.25.0
+Flask_APScheduler==1.12.2
+PyMySQL==1.0.2
+Flask==1.1.2

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			html,
+			body{
+				height: 100%;
+				
+			}
+			*{
+				margin: 0;
+				padding: 0;
+				text-decoration: none;
+			}
+			
+			li{
+				list-style: none;
+			}
+			
+			/* 设置滚动条样式, 宽度0 */
+			::-webkit-scrollbar{
+				width: 0px;
+			}
+			
+			.w{
+				width: 100%;
+				height: 2000px;
+				text-align: center;
+				/* background-color: pink; */
+			}
+			
+			.main{
+				width: 100%;
+				height: auto;
+				/* background-color: #00A4FF; */
+			}
+			
+			/* ==================================================第1，4部分start */
+			.init_block{
+				width: 100%;
+				height: auto;
+				background-color: #FFFFFF;
+			}
+			
+			.top{
+				/* position: relative; */
+				width: 100%;
+				height: 80px;
+				/* background-color: #3D377F; */
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				line-height: 80px;
+			}
+			
+			.name{
+				display: inline-block;
+				float: left;
+				/* position: absolute; */
+				width: auto;
+				height: 100%;
+				margin-left: 30px;
+				/* background-color: #00A4FF; */
+				color: rgb(147,147,147);
+				font-size: 18px;
+			}
+			
+			.top .key_word{
+				display: inline-block;
+				float: left;
+				width: auto;
+				height: 100%;
+				/* background-color: pink; */
+				color: black;
+				font-size: 30px;
+			}
+
+			.tip_1{
+				width: 100%;
+				height: 40px;
+				background-color: rgb(228,235,241);
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				border-top: none;
+				line-height: 40px;
+			}
+			
+			.tip_1 span{
+				width: auto;
+				height: 100%;
+				float: left;
+				margin-left: 30px;
+				/* background-color: #00A4FF; */
+				font-size: 16px;
+				color: rgb(55,104,141);
+			}
+
+			.in_main_block_1{
+				width: 100%;
+				height: 500px;
+				margin-bottom: 30px;
+				/* background-color: red; */
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				border-top: none;
+			}
+			
+			/* ====================================================第一个大块左 */
+			
+			.one_left{
+				float: left;
+				width: 40%;
+				height: 100%;
+				/* background-color: #00A4FF; */
+			}
+			
+			.one_left_one{
+				/* float: left; */
+				width: auto;
+				height: 50%;
+				/* background-color: pink; */
+			}
+			
+			.one_left_one_title{
+				width: 100%;
+				height: 50px;
+				/* background-color: #00A4FF; */
+				line-height: 50px;
+				font-family: "宋体";
+				font-size: 24px
+			}
+			
+			.one_left_one_left{
+				width: 50%;
+				height: 200px;
+				background-color: #6B45BC;
+			}
+			
+			.one_left_one_left > .subtitle{
+				width: 100%;
+				height: 40px;
+				/* background-color: #000000; */
+				line-height: 40px;
+				font-size: 20px;
+			}
+			
+			.one_left_two{
+				float: left;
+				width: 50%;
+				height: 50%;
+				background-color: green;
+			}
+			
+			.one_left_three{
+				float: left;
+				width: 50%;
+				height: 50%;
+				background-color: gold;
+			}
+			
+			/* ====================================================第一个大块右 */
+			
+			.one_right{
+				float: left;
+				width: 60%;
+				height: 100%;
+				background-color: #00A4FF;
+			}
+			
+			.one_right_one{
+				/* float: left; */
+				width: auto;
+				height: 50%;
+				background-color: greenyellow;
+			}
+			
+			.one_right_two{
+				float: left;
+				width: 50%;
+				height: 50%;
+				background-color: palegreen;
+			}
+			
+			.one_right_three{
+				float: left;
+				width: 50%;
+				height: 50%;
+				background-color: peru;
+			}
+			/* ==================================================第2，3部分start */
+			.tip_2{
+				width: 100%;
+				height: 40px;
+				background-color: rgb(228,235,241);
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				line-height: 40px;
+			}
+	
+			.tip_2 span{
+				width: auto;
+				height: 100%;
+				float: left;
+				margin-left: 30px;
+				/* background-color: #00A4FF; */
+				font-size: 16px;
+				color: rgb(55,104,141);
+			}
+			
+			.in_main_block_2{
+				width: 100%;
+				height: 300px;
+				margin-bottom: 30px;
+				/* background-color: red; */
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				border-top: none;
+				line-height: 100px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="w">
+			<div class="main">
+				<!-- /* ==================================================第1部分start */ -->
+				<div class="init_block">
+					<div class="top">
+						<span class="name">事件 ：</span>
+						<span class="key_word">
+							舆情
+						</span>
+					</div>
+					<div class="tip_1">
+						<span>简要分析统计</span>
+					</div>
+					<div class="in_main_block_1">
+						<div class="one_left">
+							<div class="one_left_one">
+								<div class="one_left_one_title">
+									事件时间/地区
+								</div>
+								<div class="one_left_one_left">
+									<div class="subtitle">
+										第一次发生:
+									</div>
+								</div>
+							</div>
+							<div class="one_left_two">
+								
+							</div>
+							<div class="one_left_three">
+								
+							</div>
+						</div>
+						
+						<div class="one_right">
+							<div class="one_right_one">
+								
+							</div>
+							<div class="one_right_two">
+								
+							</div>
+							<div class="one_right_three">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /* ==================================================第2部分start */ -->
+				<div class="init_block">
+					<div class="tip_2">
+						<span>事情报道分析</span>
+					</div>
+					<div class="in_main_block_2">
+						
+					</div>
+				</div>
+				<!-- /* ==================================================第3部分start */ -->
+				<div class="init_block">
+					<div class="tip_2">
+						<span>网民关注分析</span>
+					</div>
+					
+					<div class="in_main_block_2">
+						
+					</div>
+				</div>
+				<!-- /* ==================================================第4部分start */ -->
+				<div class="init_block">
+					<div class="tip_2">
+						<span>政府反馈分析</span>
+					</div>
+					
+					<div class="in_main_block_1">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="Shortcut Icon" href="../static/img/icon.ico" type="image/x-icon" />
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_2509369_xx2ajk0v81j.css"/>
+		<title>政府舆情分析系统</title>
+		<style type="text/css">
+			html,
+			body{
+				height: 100%;
+				background-color: rgb(235,235,235);
+			}
+			*{
+				margin: 0;
+				padding: 0;
+				text-decoration: none;
+			}
+
+			li{
+				list-style: none;
+			}
+
+			input{
+				outline: none;
+			}
+
+			input:focus{
+				outline: none;
+			}
+
+			input:checked{
+				background-color: red;
+			}
+
+			.w{
+				width: auto;
+				height: auto;
+				text-align: center;
+				/* background-color: aqua; */
+			}
+
+			/* ====================================初始化页面 */
+
+			.main{
+				position: relative;
+				display: inline-block;
+				width: 1536px;
+				height: 100%;
+				/* background-color: red; */
+			}
+
+			.main_top{
+				/* position: fixed; */
+				float: left;
+				width: 1536px;
+				height: 80px;
+				background-color: #2d3335;
+				text-align: left;
+				line-height: 80px;
+
+			}
+			/* =========================================================文字logo */
+			.main_logo_title{
+				display: inline-block;
+				float: left;
+				width: 512px;
+				height: 80px;
+				/* background-color: #73EF67; */
+			}
+
+			.logo{
+				display: inline-block;
+				float: left;
+				width: 70px;
+				height: 70px;
+				/* background-color: #FF7F50; */
+				margin-left: 15px;
+			}
+
+			.logo img{
+				width: 100%;
+				height: 100%;
+			}
+
+			.title{
+				display: block;
+				float: left;
+				margin-left: 10px;
+				width: 300px;
+				height: 100%;
+				/* background-color: #6B45BC; */
+				color: lightgray;
+				text-align: left;
+			}
+
+			.title_title{
+				height: 50px;
+				/* background-color: #696969; */
+				line-height: 60px;
+				font-size: 30px;
+				font-weight: 700;
+				font-family: "新宋体";
+			}
+
+			.title_subtitle{
+				height: 30px;
+				/* background-color: #3D377F; */
+				line-height: 10px;
+				font-size: 12px;
+				font-weight: 700;
+				font-family: "宋体";
+			}
+
+			/* =========================================================文字logo */
+			/* =========================================================搜索框 */
+			.main_top_search{
+				display: block;
+				position: relative;
+				float: left;
+				height: 100%;
+				width: 512px;
+				/* background-color: #00A4FF; */
+				text-align: center;
+				line-height: 80px;
+			}
+
+			#input{
+				display: inline-block;
+				float: none;
+				z-index: 1;
+				width: 295px;
+				height: 30px;
+				padding-left: 8px;
+				background-color: #222628 !important;
+				border-radius: 8px;
+				border: 1px #57595B solid;
+				color: lightgray;
+				font-size: 17px;
+				font-weight: 100;
+				font-family: "新宋体";
+			}
+
+
+			.main_top_search img{
+				z-index: 1;
+				position: absolute;
+				float: right;
+				width: 25px;
+				height: 25px;
+				top: 28px;
+				right: 110px;
+				/* background-color: #00A4FF; */
+			}
+
+			.main_top_search img:hover{
+				background-color: transparent;
+			}
+			/* =========================================================搜索框 */
+			/* =========================================================上左 */
+			.main_top_left{
+				display: block;
+				position: relative;
+				float: left;
+				height: 100%;
+				width: 512px;
+				/* background-color: #00A4FF; */
+				text-align: center;
+				line-height: 80px;
+			}
+			
+			.screen_control{
+				display: inline-block;
+				position: absolute;
+				float: right;
+				right: 10px;
+				top: 20px;
+				height: 40px;
+				width: 40px;
+				/* background-color: pink; */
+				text-align: center;
+				line-height: 40px;
+			}
+			
+			.screen_control:hover{
+				cursor: pointer;
+			}
+			
+			.iconfont{
+				font-size: 25px;
+				color: lightgray;
+			}
+			
+			/* =========================================================上左 */
+			.main_left{
+				position: fixed;
+				width: 90px;
+				height: 100%;
+				margin-top: 80px;
+				/* background-color: navajowhite; */
+			}
+
+			.main_right{
+				position: fixed;
+				margin-left: 110px;
+				margin-top: 100px;
+				width: 1405px;
+				height: 90%;
+				/* background-color: #ADFF2F; */
+			}
+
+			.iframe_init{
+				width: 100%;
+				height: 100%;
+				border: none;
+			}
+
+			/* ======================================主页面 */
+
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				$("#search").unbind("click").on("click",function(){
+					// 设置img的class为yes,标志是通过搜索框访问
+					$("#search img").attr("class","yes");
+					// window.alert($("#search img").attr("class"));
+
+					$("#nav").contents().find("#first").removeClass("click");
+					$("#nav").contents().find(".main a").removeClass("click");
+					$("#nav").contents().find("#search_click").addClass("click");
+
+
+					var content = $(".main_top_search input").val();
+					$.get("/search_content",{"content":content},function(data){
+						if (content == "" || content == "舆情追踪..."){
+							window.alert("搜索框不能为空！");
+						};
+					});
+				});
+				
+				$(".screen_control i").click(function(){
+					var e = jQuery.Event("keydown");
+					e.keyCode = 122;
+					e.which = 122;
+					$(".iconfont").css({"color":"red"});
+				});
+
+
+				$("#input").focus(function(){
+						$(this).val("");
+					});
+
+
+				$("#input").blur(function(){
+						$("#input").val(content);
+					});
+
+
+				$("#input").keydown(function(event){
+					// window.alert(event.which);
+					if (event.which == 13){
+						// window.alert(event.which);
+						$("#search img").click();
+					}
+				});
+				
+			});
+
+
+		</script>
+	</head>
+	<body>
+		<div class="w">
+			<div class="main">
+				<div class="main_top">
+					<div class="main_logo_title">
+						<div class="logo">
+							<img src="../static/img/logo.jpg" >
+						</div>
+
+						<div class="title">
+							<div class="title_title">政府舆情分析系统</div>
+							<div class="title_subtitle">Government public opinion analysis system</div>
+						</div>
+					</div>
+
+					<div class="main_top_search">
+						<input type="text" name="input" id="input" value="舆情追踪..." />
+						<a href="yuqing_genzong.html" target="iframe_a" id="search">
+							<img src="../static/img/search.png" class="no">
+						</a>
+					</div>
+					
+<!-- 					<div class="main_top_left">
+						<div class="screen_control">
+							<a href="#"><i class="iconfont icon-quanping"></i></a>
+						</div>
+					</div> -->
+				</div>
+
+				<div class="main_left">
+					<iframe src="nav.html" class="iframe_init" id="nav"></iframe>
+				</div>
+				
+				<div class="main_right">
+					<iframe src="shouye.html" name="iframe_a" class="iframe_init"></iframe>
+				</div>
+				
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_2509369_rod9ziqr66.css"/>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				text-decoration: none;
+			}
+			
+			li{
+				list-style: none;
+			}
+			
+			.w{
+				width: auto;
+				height: auto;
+				text-align: center;
+				/* background-color: aqua; */
+			}
+			
+			.main{
+				position: fixed;
+				width: 90px;
+				height: 100%;
+		/* 		margin-top: 80px; */
+				background-color: #2d3335;
+			}
+			
+			.main a{
+				display: inline-block;
+				width: 80px;
+				height: 80px;
+				border-left: 10px transparent solid;
+				border-bottom: 2px lightgray solid;
+				/* margin-bottom: -3px; */
+				background-color: #2d3335;
+				color: lightgray;
+				text-align: center;
+				font-size: 17px;
+			}
+		
+			.main a:hover{
+				transition: 0.3s;
+				border-left: 10px coral solid;
+				background-color: #111516;
+			}
+			
+			.iconfont {
+				/* color: dimgrey; */
+				display: inline-block;
+				font-size: 35px;
+				margin-top: 8px;
+			}
+			
+			.main .click {
+				display: inline-block;
+				width: 80px;
+				height: 80px;
+				border-left: 10px coral solid;
+				border-bottom: 2px lightgray solid;
+				/* margin-bottom: -3px; */
+				background-color: #111516;
+				color: lightgray;
+				text-align: center;
+				font-size: 17px;
+			}
+			
+		</style>
+		
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("#first").addClass("click");
+		  	$(".main a").each(function(){
+		  	    $(this).click(function(){
+					$("#first").removeClass("click");
+					$(".main a").removeClass("click");//bgcolor是点击之后的样式,   .main_left a是要点击的地方（事件触发）
+		  			$(this).addClass("click");
+		  	    });
+		  	});
+		  });
+		</script>
+	</head>
+	<body>
+		<div class="w">
+			<div class="main">
+				<ul>
+					<li>
+						<a href="shouye.html" id="first" target="iframe_a">
+							<div class="icon"><i class="iconfont icon-shouye"></i></div>
+							<div class="title">首页</div>
+						</a>
+					</li>
+					
+					<li>
+						<a href="yuqingzonglan.html" target="iframe_a"  id="yuqingzonglan">
+							<div class="icon"><i class="iconfont icon-zonglan"></i></div>
+							<div class="title">舆情总览</div>
+						</a>
+					</li>
+					
+					<li>
+						<a href="yuqingxinxi.html" target="iframe_a"  id="yuqingxinxi">
+							<div class="icon"><i class="iconfont icon-xinxi"></i></div>
+							<div class="title">舆情信息</div>
+						</a>
+					</li>
+					
+					<li>
+						<a href="yuqing_genzong.html" target="iframe_a" id="search_click">
+							<div class="icon"><i class="iconfont icon-zhuizong"></i></div>
+							<div class="title">舆情追踪</div>
+						</a>
+					</li>
+					
+<!-- 					<li>
+						<a href="right_2019.html" target="iframe_a" id="yuqingyuce">
+							<div class="icon"><i class="iconfont icon-yuce"></i></div>
+							<div class="title">舆情预测</div>
+						</a>
+					</li> -->
+					
+<!-- 					<li>
+						<a href="right_2018.html" target="iframe_a">
+							<div class="icon"><i class="iconfont icon-baogao"></i></div>
+							<div class="title">舆情报告</div>
+						</a>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

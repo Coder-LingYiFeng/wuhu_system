@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
+		<script src="../static/js/echarts-wordcloud.min.js"></script>
+		<!-- <script src="../static/js/echarts.min.js"></script> -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<style type="text/css">
+			html,
+			body{
+				height: 100%;
+				
+			}
+			*{
+				margin: 0;
+				padding: 0;
+				text-decoration: none;
+			}
+			
+			li{
+				list-style: none;
+			}
+			
+			/* 设置滚动条样式, 宽度0 */
+			::-webkit-scrollbar{
+				width: 0px;
+			}
+			
+			.w{
+				width: 100%;
+				height: 1600px;
+				text-align: center;
+				/* background-color: pink; */
+			}
+
+			.main{
+				width: 100%;
+				height: auto;
+				/* background-color: #FFFFFF; */
+			}
+
+			/* =====================================================第一个盒子 */
+			.first{
+				width: 100%;
+				height: 540px;
+				margin-bottom: 30px;
+				background-color: #FFFFFF;
+			}
+
+			.all_title{
+				width: 100%;
+				height: 80px;
+				padding-left: 30px;
+				text-align: left;
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				border-bottom: none;
+				/* color: rgb(130,130,130); */
+				font-family: "宋体";
+				font-size: 40px;
+				line-height: 80px;
+			}
+
+			.first_title{
+				width: 100%;
+				height: 40px;
+				padding-left: 30px;
+				text-align: left;
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				background-color: rgb(228,235,241);
+				color: rgb(75,119,153);
+				font-family: "宋体";
+				font-size: 20px;
+				line-height: 40px;
+			}
+
+			.xuanze{
+				display: inline-block;
+				float: right;
+				width: 60%;
+				height: 100%;
+				/* background-color: #008000; */
+			}
+
+			.xuanze li{
+				display: inline-block;
+				float: right;
+				margin-right: 20px;
+				margin-top: 5px;
+				width: 55px;
+				height: 26px;
+				line-height: 26px;
+				/* background-color: pink; */
+				text-align: center;
+				border-radius: 5px;
+				color: #FFFFFF;
+			}
+
+			.xuanze ul li:hover{
+				color: red;
+			}
+
+			.first_content{
+				position: relative;
+				width: 100%;
+				height: auto;
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				border-top: none;
+				/* padding-left: 30px; */
+				/* background-color: #00A4FF; */
+			}
+
+			.first_top{
+				width: 100%;
+				height: 360px;
+				padding: 20px 20px 20px 30px;
+				/* background-color: #008000; */
+			}
+
+			#reci_bar{
+				display: inline-block;
+				float: left;
+				width: 93%;
+				height: 100%;
+				/* background-color: gold; */
+			}
+
+			.first_middle{
+				padding: 20px 20px 20px 30px;
+				width: 100%;
+				height: 360px;
+				box-sizing: border-box;
+				border-top: 3px rgb(235,235,235) solid;
+				background-color: #FFFFFF;
+			}
+
+			.first_middle_title{
+				float: left;
+				display: inline-block;
+				width: 50px;
+				height: 100%;
+				/* background-color: #20FF4D; */
+				font-family: "宋体";
+				font-size: 30px;
+			}
+
+			#wordcloud{
+				display: inline-block;
+				float: right;
+				width: 96%;
+				height: 100%;
+				/* background-color: gold; */
+			}
+
+
+
+
+
+			.first_bottom{
+				width: 100%;
+				height: 600px;
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				border-top: none;
+				background-color: #FFFFFF;
+			}
+
+			.first_bottom_top{
+				position: relative;
+				height: 50%;
+				margin-left: 30px;
+				/* background-color: #00A4FF; */
+			}
+
+			.first_bottom_top_left{
+				position: absolute;
+				left: 0;
+				height: 100%;
+				width: 45%;
+				box-sizing: border-box;
+				border-right: 3px rgb(235,235,235) solid;
+				/* background-color: #3D377F; */
+			}
+
+			.first_bottom_top_left_title{
+				float: left;
+				width: 150px;
+				height: 300px;
+				/* background-color: #00A4FF; */
+				line-height: 300px;
+				font-family: "宋体";
+				font-size: 25px;
+
+			}
+
+			.zhuti_top{
+				float: right;
+				display: inline-block;
+				width: 450px;
+				height: 300px;
+				/* background-color: powderblue; */
+			}
+
+			.zhuti_top li{
+				width: 320px;
+				height: 35px;
+				margin:20px 0 0 50px;
+				background-color: rgb(235,235,235);
+				border: 1px rgb(201,201,201) solid;
+				border-radius: 4px;
+				line-height: 30px;
+			}
+
+			.div_six{
+				display: inline-block;
+				float: left;
+				width: 150px;
+				height: 35px;
+				background-color:#6B45BC;
+				line-height: 35px;
+				font-size: 17px;
+				color: #FFFFFF;
+				border-radius: 4px;
+			}
+
+			.div_six_span{
+				float: left;
+				display: inline-block;
+				width: 150px;
+				height: 35px;
+				font-size: 16px;
+				line-height: 35px;
+				text-align: center;
+				/* background-color: #000000; */
+				/* color: gray; */
+
+			}
+
+
+			.first_bottom_top_right{
+				position: absolute;
+				right: 0;
+				height: 100%;
+				width: 55%;
+				/* background-color: greenyellow; */
+			}
+
+			.first_bottom_top_right_title{
+				float: left;
+				margin-left: 20px;
+				width: 150px;
+				height: 300px;
+				/* background-color: #00A4FF; */
+				line-height: 300px;
+				font-family: "宋体";
+				font-size: 25px;
+			}
+
+			.first_bottom_top_right_chart{
+				float: left;
+				display: inline-block;
+				width: 580px;
+				height: 300px;
+				/* background-color: powderblue; */
+			}
+
+			#zhuti_pie{
+				width: 100%;
+				height: 100%;
+				/* background-color: #008000; */
+			}
+
+
+
+
+			.first_bottom_bottom{
+				position: relative;
+				height: 50%;
+				box-sizing: border-box;
+				border-top: 3px rgb(235,235,235) solid;
+				/* background-color: #00A4FF; */
+			}
+
+			.first_bottom_bottom_title{
+				margin-left: 30px;
+				float: left;
+				width: 150px;
+				height: 300px;
+				/* background-color: #00A4FF; */
+				line-height: 300px;
+				font-family: "宋体";
+				font-size: 25px;
+			}
+
+			.first_bottom_bottom_chart{
+				float: left;
+				width: 1200px;
+				height: 100%;
+				/* background-color: #20FF4D; */
+			}
+
+			#zhuti_zhexian{
+				width: 100%;
+				height: 100%;
+				/* background-color: #3D377F; */
+			}
+
+
+		</style>
+
+		<script type="text/javascript">
+			$(function(){
+				var year = 2021;
+
+				$("#year_2015").click(function(){
+					year_change(2015);
+				});
+
+				$("#year_2016").click(function(){
+					year_change(2016);
+				});
+
+				$("#year_2017").click(function(){
+					year_change(2017);
+				});
+
+				$("#year_2018").click(function(){
+					year_change(2018);
+				});
+
+				$("#year_2019").click(function(){
+					year_change(2019);
+				});
+
+				$("#year_2020").click(function(){
+					year_change(2020);
+				});
+
+				$("#year_2021").click(function(){
+					year_change(2021);
+				});
+
+				year_change(year);
+
+				function year_change(year){
+
+					var wordcloud_chart = echarts.init(document.getElementById('wordcloud'));
+						 wordcloud_chart.showLoading({
+						text:'Loading',
+						maskColor:'rgba(0,0,0,0)',
+						color:'rgb(73,163,254)',
+						textColor:'rgb(73,163,254)',
+						lineWidth: 5,
+						fontSize: 16,
+						spinnerRadius: 15,
+					});
+					 $.get('wordcloud_'+year+'.json', function(data){
+						 wordcloud_chart.hideLoading();
+						 wordcloud_chart.setOption(
+						 {
+								title: {
+								        text: year+"年",
+										left: '10px',
+										top: '10px',
+										textStyle: {
+								                fontFamily: 'Arial',
+								                fontSize: 25,
+								                fontStyle: 'normal',
+								                fontWeight: 'bolder',
+												color:'rgb(73,163,254)',
+										    },
+
+								    },
+									toolbox: {
+										top:10,
+										right:20,
+										show: true,
+										feature: {
+											mark: {show: true},
+											// dataView: {show: true, readOnly: false},
+											// restore: {show: true},
+											// magicType: {type: ['line', 'bar']},
+											saveAsImage: {show: true}
+										}
+									},
+								tooltip: {},
+								series: [ {
+										 type: 'wordCloud',
+										 gridSize: 2,
+										 //字体大小范围
+										 sizeRange: [13, 80],
+										 //字体旋转角度范围
+										 rotationRange: [-90, 90],
+										 //词云图形状
+										 shape: 'cicle',
+										 left: 'center',
+										 top: 'center',
+										 right: null,
+										 bottom: null,
+
+										 //词云图长宽
+										 width: '100%',
+										 height: '100%',
+										 // 是否画超出范围的词
+										 // drawOutOfBound: true,
+										 textStyle: {
+											 //字体随机颜色
+											 normal: {
+												 color: function () {
+													 return 'rgb(' + [
+														 Math.round(Math.random() * 150),
+														 Math.round(Math.random() * 150),
+														 Math.round(Math.random() * 150)
+													 ].join(',') + ')';
+												 }
+											 },
+											 emphasis: {
+												 //阴影距离
+												 shadowBlur: 8,
+												 //阴影颜色
+												 shadowColor: '#333'
+											 }
+										 },
+										 data: data.datas
+								} ]
+						 })
+					 },'json');
+
+
+					 var reci_barChart = echarts.init(document.getElementById('reci_bar'));
+					 reci_barChart.showLoading({
+					 		text:'Loading',
+					 		maskColor:'rgba(0,0,0,0)',
+					 		color:'rgb(73,163,254)',
+					 		textColor:'rgb(73,163,254)',
+					 		lineWidth: 5,
+					 		fontSize: 16,
+					 		spinnerRadius: 15,
+					 	});
+						// window.alert($("#year_2015 li").css("background-color"));
+					 $.get('reci_bar_'+year+'.json',function(data){
+					 	reci_barChart.hideLoading();  // 隐藏 loading 效果
+					 	reci_barChart.setOption({
+						color: $("#year_"+year+" li").css("background-color"),
+							title: {
+							        text: year+"年",
+									left: '10px',
+									top: '10px',
+									textStyle: {
+							                fontFamily: 'Arial',
+							                fontSize: 25,
+							                fontStyle: 'normal',
+							                fontWeight: 'bolder',
+											color:'rgb(73,163,254)',
+									    },
+
+							    },
+							grid:{
+								   x:50,
+								   y:70,
+								   x2:100,
+								   y2:80
+								  },
+							toolbox: {
+								top:10,
+								right:20,
+								show: true,
+								feature: {
+									mark: {show: true},
+									// dataView: {show: true, readOnly: false},
+									restore: {show: true},
+									magicType: {type: ['line', 'bar']},
+									saveAsImage: {show: true}
+								}
+							},
+					 	    tooltip: {},
+					 	    dataset: data.datas,
+					 	    xAxis: {type: 'category'},
+					 	    yAxis: {
+
+					 		},
+					 		dataZoom:[
+					 			{
+					 				type:'inside',
+					 				// start:50,
+					 				// end:80
+					 			},
+					 			{
+					 				type:'slider',
+					 				// start:50,
+					 				// end:80,
+					 				// yAxisIndex:0
+					 			},
+					 			{
+					 				type:'slider',
+					 				// start:50,
+					 				// end:80,
+					 				yAxisIndex:0
+					 			}
+					 		],
+					 	    // Declare several bar series, each will be mapped
+					 	    // to a column of dataset.source by default.
+					 	    series: [
+					 	        {type: 'bar'}
+					 	    ]
+					 	});
+
+					 },'json');
+
+					 var zhuti_pie = echarts.init(document.getElementById('zhuti_pie'));
+					 zhuti_pie.showLoading({
+					 		text:'Loading',
+					 		maskColor:'rgba(0,0,0,0)',
+					 		color:'rgb(73,163,254)',
+					 		textColor:'rgb(73,163,254)',
+					 		lineWidth: 5,
+					 		fontSize: 16,
+					 		spinnerRadius: 15,
+					 	});
+
+
+					var zhuti_zheixan = echarts.init(document.getElementById('zhuti_zhexian'));
+					zhuti_zheixan.showLoading({
+							text:'Loading',
+							maskColor:'rgba(0,0,0,0)',
+							color:'rgb(73,163,254)',
+							textColor:'rgb(73,163,254)',
+							lineWidth: 5,
+							fontSize: 16,
+							spinnerRadius: 15,
+						});
+
+
+					 $.get('LDA_'+year+'.json',function(data){
+						 $("#zhuti_1").text("").append(data.lda_shuju[0].yuqing_wenzibintu[0].name);
+						 $("#zhuti_num_1").text("").append(data.lda_shuju[0].yuqing_wenzibintu[0].value);
+						 $("#zhuti_2").text("").append(data.lda_shuju[0].yuqing_wenzibintu[1].name);
+						 $("#zhuti_num_2").text("").append(data.lda_shuju[0].yuqing_wenzibintu[1].value);
+						 $("#zhuti_3").text("").append(data.lda_shuju[0].yuqing_wenzibintu[2].name);
+						 $("#zhuti_num_3").text("").append(data.lda_shuju[0].yuqing_wenzibintu[2].value);
+						 $("#zhuti_4").text("").append(data.lda_shuju[0].yuqing_wenzibintu[3].name);
+						 $("#zhuti_num_4").text("").append(data.lda_shuju[0].yuqing_wenzibintu[3].value);
+						 $("#zhuti_5").text("").append(data.lda_shuju[0].yuqing_wenzibintu[4].name);
+						 $("#zhuti_num_5").text("").append(data.lda_shuju[0].yuqing_wenzibintu[4].value);
+
+						zhuti_zheixan.hideLoading();
+						zhuti_pie.hideLoading();
+					 	zhuti_pie.setOption({
+							title: {
+							        text: year+"年",
+									left: '10px',
+									top: '10px',
+									textStyle: {
+							                fontFamily: 'Arial',
+							                fontSize: 25,
+							                fontStyle: 'normal',
+							                fontWeight: 'bolder',
+											color:'rgb(73,163,254)',
+									    },
+
+							    },
+										tooltip: {
+										    formatter: '{b}<br/>共：{c}（条）',
+										},
+										toolbox: {
+											top:20,
+											right:10,
+											show: true,
+											feature: {
+												mark: {show: true},
+												dataView: {show: true, readOnly: false},
+												// restore: {show: true},
+												saveAsImage: {show: true}
+											}
+										},
+										series: [
+											{
+												color:['rgb(92,123,217)','rgb(145,204,117)','rgb(250,200,88)','rgb(238,102,102)','rgb(115,192,222)','rgb(59,162,114)','rgb(252,132,82)','rgb(154,96,180)','rgb(234,124,204)','rgb(84,112,198)'],
+												type: 'pie',
+												top:20,
+												radius: [30, 120],
+												center: ['50%', '50%'],
+												// roseType: 'area',
+												itemStyle: {
+													borderRadius: 8
+												},
+												data: data.lda_shuju[0].yuqing_wenzibintu
+											}
+										]
+									});
+
+						zhuti_zheixan.setOption({
+							legend: {
+								top:20
+							},
+							axisPointer:{
+								type:"line"
+							},
+							tooltip: {
+								trigger: 'item',
+								formatter: '{a}<br/>{b} 年<br/>{c}（条）',
+								// showDelay:200,
+								// hideDelay:500
+								boderColor:'blue'
+							},
+							toolbox: {
+								show: true,
+								// orient: 'vertical',
+								right:10,
+								top: 20,
+								feature: {
+								mark: {show: true},
+								dataView: {show: true, readOnly: false},
+								// restore: {show: true},
+								// magicType: {type: ['line', 'bar']},
+								saveAsImage: {show: true}
+								}
+							},
+								xAxis: {
+									type: 'category',
+									data: data.lda_shuju[1].yuqingzoushi[0].xAxis
+								},
+								yAxis: {
+									type: 'value'
+								},
+								barWidth:10,
+								series:[{
+									series:data.lda_shuju[1].yuqingzoushi[1].series[0].name,
+									color:"rgb(252,132,82)",
+									name:data.lda_shuju[1].yuqingzoushi[1].series[0].name,
+									data: data.lda_shuju[1].yuqingzoushi[1].series[0].data,
+									type: 'line',
+									smooth: true
+								},{
+									color:"rgb(252,132,82)",
+									series:data.lda_shuju[1].yuqingzoushi[1].series[0].name,
+									name:data.lda_shuju[1].yuqingzoushi[1].series[0].name,
+									data: data.lda_shuju[1].yuqingzoushi[1].series[0].data,
+									type: 'bar',
+
+									smooth: true
+								},{
+									series:data.lda_shuju[1].yuqingzoushi[1].series[1].name,
+									color:"rgb(145,204,117)",
+									name:data.lda_shuju[1].yuqingzoushi[1].series[1].name,
+									data: data.lda_shuju[1].yuqingzoushi[1].series[1].data,
+									type: 'line',
+									smooth: true
+								},{
+									color:"rgb(145,204,117)",
+									series:data.lda_shuju[1].yuqingzoushi[1].series[1].name,
+									name:data.lda_shuju[1].yuqingzoushi[1].series[1].name,
+									data: data.lda_shuju[1].yuqingzoushi[1].series[1].data,
+									type: 'bar',
+
+									smooth: true
+								},{
+									series:data.lda_shuju[1].yuqingzoushi[1].series[2].name,
+									color:"rgb(250,200,88)",
+									name:data.lda_shuju[1].yuqingzoushi[1].series[2].name,
+									data: data.lda_shuju[1].yuqingzoushi[1].series[2].data,
+									type: 'line',
+									smooth: true
+								},{
+									color:"rgb(250,200,88)",
+									series:data.lda_shuju[1].yuqingzoushi[1].series[2].name,
+									name:data.lda_shuju[1].yuqingzoushi[1].series[2].name,
+									data: data.lda_shuju[1].yuqingzoushi[1].series[2].data,
+									type: 'bar',
+
+									smooth: true
+								},{
+									series:data.lda_shuju[1].yuqingzoushi[1].series[3].name,
+									color:"rgb(115,192,222)",
+									name:data.lda_shuju[1].yuqingzoushi[1].series[3].name,
+									data: data.lda_shuju[1].yuqingzoushi[1].series[3].data,
+									type: 'line',
+									smooth: true
+								},{
+									color:"rgb(115,192,222)",
+									series:data.lda_shuju[1].yuqingzoushi[1].series[3].name,
+									name:data.lda_shuju[1].yuqingzoushi[1].series[3].name,
+									data: data.lda_shuju[1].yuqingzoushi[1].series[3].data,
+									type: 'bar',
+
+									smooth: true
+								},{
+									series:data.lda_shuju[1].yuqingzoushi[1].series[4].name,
+									color:"rgb(252,132,82)",
+									name:data.lda_shuju[1].yuqingzoushi[1].series[4].name,
+									data: data.lda_shuju[1].yuqingzoushi[1].series[4].data,
+									type: 'line',
+									smooth: true
+								},{
+									color:"rgb(252,132,82)",
+									series:data.lda_shuju[1].yuqingzoushi[1].series[4].name,
+									name:data.lda_shuju[1].yuqingzoushi[1].series[4].name,
+									data: data.lda_shuju[1].yuqingzoushi[1].series[4].data,
+									type: 'bar',
+									smooth: true
+								},
+
+								]
+							}
+						);
+
+					 },'json');
+
+
+
+
+
+
+
+
+
+				}
+
+			});
+		</script>
+	</head>
+	<body>
+		<div class="w">
+			<div class="main">
+				<div class="first">
+					<div class="all_title">
+						年度舆情跟踪
+					</div>
+
+					<div class="first_title">
+						年度热词分析
+						<div class="xuanze">
+							<ul>
+								<a href="#" id="year_2015"><li style="background-color: rgb(92,123,217);">2015</li></a>
+								<a href="#" id="year_2016"><li style="background-color: rgb(145,204,117);">2016</li></a>
+								<a href="#" id="year_2017"><li style="background-color: rgb(250,200,88);">2017</li></a>
+								<a href="#" id="year_2018"><li style="background-color: rgb(238,102,102);">2018</li></a>
+								<a href="#" id="year_2019"><li style="background-color: rgb(115,192,222);">2019</li></a>
+								<a href="#" id="year_2020"><li style="background-color: rgb(59,162,114);">2020</li></a>
+								<a href="#" id="year_2021"><li style="background-color: rgb(252,132,82);">2021</li></a>
+								<li style="background-color: rgb(228,235,241);width: 110px;color: rgb(73,163,254);font-weight: 700;">年份选择：</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="first_content">
+						<div class="first_top">
+							<div class="first_middle_title">
+								&emsp;热词追踪柱形图
+							</div>
+							<div id="reci_bar"></div>
+						</div>
+
+						<div class="first_middle">
+							<div class="first_middle_title">
+								&emsp;热词词云
+							</div>
+							<div id="wordcloud">
+
+							</div>
+						</div>
+					</div>
+
+					<div class="first_title" style="border:none;background-color: rgb(235,235,235); height: 30px;"></div>
+
+					<div class="first_title">
+						年度舆情走势
+					</div>
+
+					<div class="first_bottom">
+						<div class="first_bottom_top">
+							<div class="first_bottom_top_left">
+								<div class="first_bottom_top_left_title">
+									主题汇总TOP5
+								</div>
+								<ul class="zhuti_top">
+									<li>
+										<div id="zhuti_1" class="div_six" style="background-color: rgb(145,204,117);"></div>
+										<span id="zhuti_num_1" class="div_six_span"></span>
+									</li>
+									<li>
+										<div id="zhuti_2" class="div_six" style="background-color: rgb(250,200,88);"></div>
+										<span id="zhuti_num_2" class="div_six_span"></span>
+									</li>
+									<li>
+										<div id="zhuti_3" class="div_six" style="background-color: rgb(115,192,222);"></div>
+										<span id="zhuti_num_3" class="div_six_span"></span>
+									</li>
+									<li>
+										<div id="zhuti_4" class="div_six" style="background-color: rgb(59,162,114);"></div>
+										<span id="zhuti_num_4" class="div_six_span"></span>
+									</li>
+									<li>
+										<div id="zhuti_5" class="div_six" style="background-color: rgb(238,102,102);"></div>
+										<span id="zhuti_num_5" class="div_six_span"></span>
+									</li>
+								</ul>
+							</div>
+
+							<div class="first_bottom_top_right">
+								<div class="first_bottom_top_right_title">
+									主题分布比例
+								</div>
+								<div class="first_bottom_top_right_chart">
+									<div id="zhuti_pie"></div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="first_bottom_bottom">
+							<div class="first_bottom_bottom_title">
+								舆情主题走势
+							</div>
+
+							<div class="first_bottom_bottom_chart">
+								<div id="zhuti_zhexian">
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

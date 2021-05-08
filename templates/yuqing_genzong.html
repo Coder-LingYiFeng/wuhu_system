@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="../static/js/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/js/echarts.min.js"></script>
+		<style type="text/css">
+			html,
+			body{
+				height: 100%;
+				
+			}
+			*{
+				margin: 0;
+				padding: 0;
+				text-decoration: none;
+			}
+			
+			li{
+				list-style: none;
+			}
+			
+			/* 设置滚动条样式, 宽度0 */
+			::-webkit-scrollbar{
+				width: 0px;
+			}
+			
+			.w{
+				width: 100%;
+				height: 1850px;
+				text-align: center;
+				/* background-color: pink; */
+			}
+			
+			.main{
+				width: 100%;
+				height: auto;
+				/* background-color: #00A4FF; */
+			}
+			
+			#init{
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				z-index: 2;
+				/* background-color: #20FF4D; */
+			}
+			/* ==================================================第1，4部分start */
+			.init_block{
+				width: 100%;
+				height: auto;
+				background-color: #FFFFFF;
+			}
+			
+			.top{
+				/* position: relative; */
+				width: 100%;
+				height: 80px;
+				/* background-color: #3D377F; */
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				line-height: 80px;
+			}
+			
+			.name{
+				display: inline-block;
+				float: left;
+				/* position: absolute; */
+				width: auto;
+				height: 100%;
+				margin-left: 30px;
+				/* background-color: #00A4FF; */
+				color: rgb(147,147,147);
+				font-size: 18px;
+			}
+			
+			.top .key_word{
+				display: inline-block;
+				float: left;
+				width: auto;
+				height: 100%;
+				/* background-color: pink; */
+				color: black;
+				font-size: 30px;
+			}
+
+			.tip_1{
+				width: 100%;
+				height: 40px;
+				background-color: rgb(228,235,241);
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				border-top: none;
+				line-height: 40px;
+			}
+			
+			.tip_1 span{
+				width: auto;
+				height: 100%;
+				float: left;
+				margin-left: 30px;
+				/* background-color: #00A4FF; */
+				font-size: 16px;
+				color: rgb(55,104,141);
+			}
+
+			.in_main_block_1{
+				width: 100%;
+				height: 550px;
+				margin-bottom: 30px;
+				/* background-color: red; */
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				border-top: none;
+			}
+			
+			/* ====================================================第一个大块左 */
+			
+			.one_left{
+				float: left;
+				width: 30%;
+				height: 100%;
+				/* background-color: red; */
+			}
+			
+			.one_left span{
+				display: inline-block;
+				width: 100%;
+				height: 50px;
+				padding-left: 30px;
+				/* background-color: #00A4FF; */
+				line-height: 40px;
+				text-align: left;
+				font-weight: 700;
+				
+			}
+
+			.one_left .one{
+				width: auto;
+				height: 30%;
+				/* background-color: #008000; */
+			}
+			
+			.one li{
+				width: 85%;
+				height: 50px;
+				margin-bottom: 15px;
+				margin-left: 30px;
+				background-color: rgb(235,235,235);
+				border-radius: 8px;
+				line-height: 50px;
+				text-align: center;
+			}
+			
+			.div_one{
+				display: inline-block;
+				float: left;
+				width: 70px;
+				height: 46px;
+				padding: 2px;
+				border-radius: 8px;
+				font-size: 15px;
+				font-family: "宋体";
+				color: #FFFFFF;
+				text-align: center;
+				line-height: 20px;
+			}
+			
+			
+			.one li span{
+				width: 180px;
+				height: 30px;
+				/* background-color: gold; */
+				padding-left: 40px;
+				text-align: left;
+				line-height: 30px;
+				font-weight: 100;
+			}
+			
+			
+			.one_left .two{
+				width: auto;
+				height: 30%;
+				background-color: pink;
+			}
+			
+			.one_left .three{
+				width: auto;
+				height: 40%;
+				/* background-color: #eeffdd; */
+			}
+			
+			/* =================事件报道总计 */
+			
+			.three ul{
+				width: 95%;
+				height: 170px;
+				margin-left: -5px;
+				/* background-color: #008000; */
+			}
+			
+			.three li{
+				float: left;
+				width: 160px;
+				height: 40px;
+				margin-left: 35px;
+				background-color: rgb(235,235,235);
+				border-radius: 6px;
+				margin-bottom: 20px;
+				/* background-color: #00A4FF; */
+			}
+			
+			.three li span{
+				width: 90px;
+				height: 40px;
+				float: left;
+				display: inline-block;
+				/* background-color: hotpink; */
+			}
+			
+			.div_two{
+				display: inline-block;
+				float: left;
+				width: 40px;
+				height: 40px;
+				border-radius: 6px;
+				background-color: #6B45BC;
+				color: #FFFFFF;
+				font-family: "宋体";
+				line-height: 40px;
+				font-size: 18px;
+			}
+			
+	
+			/* ====================================================第一个大块右 */
+			
+			.one_right{
+				float: left;
+				width: 70%;
+				height: 100%;
+				/* background-color: #00A4FF; */
+			}
+			
+			.first{
+				width: 100%;
+				height: 55%;
+				/* background-color: #008000; */
+			}
+			
+			.first_title{
+				width: 100%;
+				height: 40px;
+				/* background-color: #00A4FF; */
+				/* padding-left: 40px; */
+				text-align: left;
+				line-height: 40px;
+				font-weight: 700;
+				font-size: 20px;
+			}
+			
+			#shijianjieshou_zhexian{
+				width: 980px;
+				height: 240px;
+				box-sizing: border-box;
+				border-bottom: 3px rgb(235,235,235) solid;
+				/* background-color: pink; */
+			}
+			
+			.one_right .left{
+				position: relative;
+				display: inline-block;
+				float: left;
+				width: 50%;
+				height: 250px;
+				/* background-color: #008000; */
+			}
+			
+			.one_right .left_tip{
+				display: inline-block;
+				float: left;
+				width: 30px;
+				height: 210px;
+				/* background-color: palegoldenrod; */
+				padding-top: 40px;
+				font-size: 20px;
+				font-weight: 700;
+			}
+			
+			#shijiandafu_loudou{
+				position: absolute;
+				right: 0;
+				width: 460px;
+				height: 250px;
+
+				/* background-color: #6B45BC; */
+			}
+			
+			
+			.one_right .right{
+				position: relative;
+				display: inline-block;
+				float: left;
+				width: 50%;
+				height: 250px;
+				/* background-color: #008000; */
+			}
+			
+			.one_right .right_tip{
+				display: inline-block;
+				float: left;
+				width: 30px;
+				height: 210px;
+				/* background-color: palegoldenrod; */
+				padding-top: 40px;
+				font-size: 20px;
+				font-weight: 700;
+			}
+			
+			#shijianzhonglei_pie{
+				/* float: left; */
+				position: absolute;
+				right: 0;
+				width: 460px;
+				height: 250px;
+				box-sizing: border-box;
+				border-right: 3px rgb(235,235,235) solid;
+				/* background-color: #6B45BC; */
+			}
+
+			/* ==================================================第2，3部分start */
+			.tip_2{
+				width: 100%;
+				height: 40px;
+				background-color: rgb(228,235,241);
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				line-height: 40px;
+			}
+	
+			.tip_2 span{
+				width: auto;
+				height: 100%;
+				float: left;
+				margin-left: 30px;
+				/* background-color: #00A4FF; */
+				font-size: 16px;
+				color: rgb(55,104,141);
+			}
+			
+			.in_main_block_2{
+				width: 100%;
+				height: 300px;
+				margin-bottom: 30px;
+				/* background-color: red; */
+				box-sizing: border-box;
+				border: 2px rgb(201,201,201) solid;
+				border-top: none;
+				line-height: 100px;
+			}
+			
+			/* ================================================================第二大块 */
+			.two_left{
+				position: relative;
+				float: left;
+				width: 50%;
+				height: 100%;
+				box-sizing: border-box;
+				border-right: 3px rgb(235,235,235) solid;
+				/* background-color: #008000; */
+			}
+			
+			.two_left_title{
+				position: absolute;
+				display: inline-block;
+				left: 30px;
+				width: 100px;
+				height: 300px;
+				/* background-color: pink; */
+				line-height: 300px;
+				color: #000000;
+				font-weight: 700;
+			}
+			
+			#method_pie{
+				position: absolute;
+				right: 0;
+				display: inline-block;
+				width:570px;
+				height: 300px;
+				/* background-color: palegreen; */
+			}
+			
+			
+			.two_right{
+				position: relative;
+				display: inline-block;
+				float: right;
+				width: 50%;
+				height: 100%;
+				/* background-color: #008000; */
+			}
+			
+			.two_right_title{
+				position: absolute;
+				display: inline-block;
+				left: 30px;
+				width: 100px;
+				height: 300px;
+				/* background-color: pink; */
+				line-height: 300px;
+				color: #000000;
+				font-weight: 700;
+			}
+			
+			#zhutifenlei_bar{
+				position: absolute;
+				right: 0;
+				display: inline-block;
+				width:570px;
+				height: 300px;
+				/* background-color: pink; */
+			}
+			
+			.three_left{
+				display: inline-block;
+				position: relative;
+				float: left;
+				/* margin-left: 100px; */
+				width: 60%;
+				height: 100%;
+/* 				box-sizing: border-box;
+				border-right: 3px rgb(235,235,235) solid; */
+				/* background-color: #008000; */
+			}
+
+			.three_left_title{
+				position: absolute;
+				display: inline-block;
+				left: 80px;
+				width: 100px;
+				height: 300px;
+				/* background-color: pink; */
+				line-height: 300px;
+				font-size: 20px;
+				color: #000000;
+				font-weight: 700;
+			}
+
+			#guanzhudu_yibiaopan{
+				position: absolute;
+				right: 0;
+				display: inline-block;
+				width:570px;
+				height: 300px;
+				/* background-color: #00A4FF; */
+			}
+
+			.three_right{
+				position: relative;
+				display: inline-block;
+				float: left;
+				width: 39%;
+				height: 100%;
+				line-height: 400px;
+			}
+
+			.three_right span{
+				display: inline-block;
+				left: 0;
+				width: 500px;
+				height: 150px;
+				/* background-color: pink; */
+				font-size: 25px;
+				font-family: "宋体";
+				line-height: 80px;
+			}
+
+
+			.four_left{
+				position: relative;
+				float: left;
+				width: 30%;
+				height: 100%;
+				box-sizing: border-box;
+				border-right: 3px rgb(235,235,235) solid;
+				/* background-color: #008000; */
+			}
+
+			.four_left_title{
+				position: absolute;
+				display: inline-block;
+				left: 30px;
+				width: 100px;
+				height: 300px;
+				/* background-color: pink; */
+				line-height: 300px;
+				color: #000000;
+				font-weight: 700;
+			}
+
+			.chuli_time{
+				position: absolute;
+				display: inline-block;
+				right: 0px;
+				width: 280px;
+				height: 300px;
+				/* background-color: pink; */
+				line-height: 300px;
+				color: #000000;
+				font-weight: 700;
+			}
+
+			.chuli_time ul{
+				position: absolute;
+				top: 50%;
+				width: 95%;
+				height: 220px;
+				margin-top: -110px;
+				/* background-color: #008000; */
+			}
+
+			.chuli_time li{
+				float: left;
+				width: 240px;
+				height: 40px;
+				margin-left: 20px;
+				border-radius: 6px;
+				margin-bottom: 20px;
+				/* background-color: #00A4FF; */
+			}
+
+			.time span{
+				position: absolute;
+				float: right;
+				width: 90px;
+				height: 40px;
+				display: inline-block;
+				border-radius: 0px 6px 6px 0px;
+				background-color: rgb(235,235,235);
+				color: black;
+				text-align: center;
+			}
+
+			.time{
+				display: inline-block;
+				float: left;
+				width: 200px;
+				height: 40px;
+				border-radius: 6px;
+				padding-left: 20px;
+				/* background-color: #6B45BC; */
+				color: #FFFFFF;
+				font-family: "宋体";
+				line-height: 40px;
+				font-size: 18px;
+				text-align: left;
+			}
+
+
+			.four_middle{
+				position: relative;
+				float: left;
+				width: 40%;
+				height: 100%;
+/* 				box-sizing: border-box;
+				border-right: 3px rgb(235,235,235) solid; */
+				/* background-color: #008000; */
+			}
+
+			.four_middle_title{
+				width: 450px;
+				height: 40px;
+				padding-left: 30px;
+				/* background-color: #00A4FF; */
+				text-align: left;
+				line-height: 40px;
+				font-weight: 700;
+				font-size: 20px
+			}
+
+			#time_tongji_bar{
+				height: 260px;
+				/* background-color: #20FF4D; */
+			}
+
+			.four_right{
+				position: relative;
+				float: right;
+				width: 30%;
+				height: 100%;
+				/* background-color: #008000; */
+			}
+
+			#time_tongji_pie{
+				margin-top: 20px;
+				margin-bottom: 20px;
+				height: 260px;
+				width: 100%;
+				/* background-color: #00A4FF; */
+			}
+		</style>
+
+		<script type="text/javascript">
+			$(function(){
+				var loading = echarts.init(document.getElementById("init"));
+				loading.showLoading({
+					zlevel:0,
+					maskColor:'rgb(255,255,255)',
+					text:'Loading',
+					color:'rgb(73,163,254)',
+					textColor:'rgb(73,163,254)',
+					lineWidth: 5,
+					fontSize: 30,
+					spinnerRadius: 15,
+				});
+				// 拿到img的class判断是否点击了搜索框
+				id = $(window.parent.document).find("#search img").attr("class");
+				// 将class改回no,初始化此标志
+				$(window.parent.document).find("#search img").attr("class","no");
+				// window.alert(id);
+				$.get('keyworlds.json',{"id":id},function (data) {
+					if (data.status == "error"){
+						window.alert("未查询到相关信息！\n 已返回默认信息！！！");
+					};
+					loading.hideLoading();
+					$("#init").remove();
+						$("#key_word").text("").append(data.yuqingzhuizong[5]);
+						$("#first_time_location").text("").append(data.yuqingzhuizong[0].jianyaofenxi[0].chushimowei[0].first_time+" / "+data.yuqingzhuizong[0].jianyaofenxi[0].chushimowei[1].first_area);
+						$("#last_time_location").text("").append(data.yuqingzhuizong[0].jianyaofenxi[0].chushimowei[2].last_time+" / "+data.yuqingzhuizong[0].jianyaofenxi[0].chushimowei[3].last_area);
+						$("#shijianbaofa_time").text("").append(data.yuqingzhuizong[0].jianyaofenxi[1].shijianbaofa[0].baofayuefen);
+						$("#shijianbaofa_num").text("").append(data.yuqingzhuizong[0].jianyaofenxi[1].shijianbaofa[1].wenzhangshuliang);
+						$("#zixun_num").text("").append(data.yuqingzhuizong[0].jianyaofenxi[2].baodaotongji[0].zixun);
+						$("#qita_num").text("").append(data.yuqingzhuizong[0].jianyaofenxi[2].baodaotongji[1].qita);
+						$("#tousu_num").text("").append(data.yuqingzhuizong[0].jianyaofenxi[2].baodaotongji[2].tousu);
+						$("#qiuzhu_num").text("").append(data.yuqingzhuizong[0].jianyaofenxi[2].baodaotongji[3].qiuzhu);
+						$("#jubao_num").text("").append(data.yuqingzhuizong[0].jianyaofenxi[2].baodaotongji[4].jubao);
+						$("#jianyi_num").text("").append(data.yuqingzhuizong[0].jianyaofenxi[2].baodaotongji[5].jianyi);
+						$("#short_time").text("").append(data.yuqingzhuizong[4].zhengfufankui[0].wengzixinxi[0].chulishijian[0].short_date);
+						// window.alert(123);
+						$("#long_time").text("").append(data.yuqingzhuizong[4].zhengfufankui[0].wengzixinxi[0].chulishijian[1].long_date);
+						$("#mean_time").text("").append(data.yuqingzhuizong[4].zhengfufankui[0].wengzixinxi[0].chulishijian[2].mean_date);
+
+						$("#manyidu").text("").append(data.yuqingzhuizong[4].zhengfufankui[0].wengzixinxi[1].manyidu);
+
+						var shijianjieshou = echarts.init(document.getElementById('shijianjieshou_zhexian'));
+							shijianjieshou.setOption({
+								grid:{
+									   x:35,
+									   y:25,
+									   x2:35,
+									   y2:35
+									  },
+
+								tooltip: {
+									trigger: 'axis',
+								    formatter: '{b}<br/>共：{c}（篇）',
+								},
+								toolbox: {
+									show: true,
+									feature: {
+										mark: {show: true},
+										dataView: {show: true, readOnly: false},
+										// restore: {show: true},
+										// magicType: {type: ['line', 'bar']},
+										saveAsImage: {show: true}
+									}
+								},
+								xAxis: {
+									type: 'category',
+									data: data.yuqingzhuizong[0].jianyaofenxi[3].shijianjieshou_zhexiantu[0].xAxis
+								},
+								yAxis: {
+									type: 'value'
+								},
+								series: [{
+									data: data.yuqingzhuizong[0].jianyaofenxi[3].shijianjieshou_zhexiantu[0].series,
+									type: 'line',
+									smooth:true,
+								},
+								{
+									barWidth:30,
+									data: data.yuqingzhuizong[0].jianyaofenxi[3].shijianjieshou_zhexiantu[0].series,
+									type: 'bar'
+								}]
+							});
+
+
+						var shijiandafu = echarts.init(document.getElementById("shijiandafu_loudou"));
+							shijiandafu.setOption({
+									tooltip: {
+										trigger: 'item',
+										formatter: "{b} : {c}篇"
+									},
+									toolbox: {
+										show: true,
+										feature: {
+											mark: {show: true},
+											dataView: {show: true, readOnly: false},
+											// restore: {show: true},
+											saveAsImage: {show: true}
+										}
+									},
+									series: [
+										{
+											type:'funnel',
+											left: '10%',
+											width: '80%',
+											// height: {totalHeight} - y - y2,
+											min: 0,
+											max: data.yuqingzhuizong[0].jianyaofenxi[4].shijiandafudanwei_loudoutu[0].max,
+											minSize: '0%',
+											maxSize: '100%',
+											sort: 'descending',
+											gap: 2,
+											top:25,
+											bottom:10,
+											label: {
+												show: true,
+												position: 'inside'
+											},
+											labelLine: {
+												length: 10,
+												lineStyle: {
+													width: 1,
+													type: 'solid'
+												}
+											},
+											itemStyle: {
+												borderColor: '#fff',
+												borderWidth: 1
+											},
+											emphasis: {
+												label: {
+													fontSize: 15
+												}
+											},
+											data: data.yuqingzhuizong[0].jianyaofenxi[4].shijiandafudanwei_loudoutu[1].data
+										}
+									]
+								}
+
+							);
+
+						var shijianzhonglei = echarts.init(document.getElementById("shijianzhonglei_pie"));
+							shijianzhonglei.setOption({
+										// legend: {
+										// 	top: 'bottom'
+										// },
+										tooltip: {
+										    formatter: '{b}<br/>共：{c}（条）',
+										},
+										toolbox: {
+											show: true,
+											feature: {
+												mark: {show: true},
+												dataView: {show: true, readOnly: false},
+												// restore: {show: true},
+												saveAsImage: {show: true}
+											}
+										},
+										series: [
+											{
+												type: 'pie',
+												top:25,
+												radius: [30, 120],
+												center: ['50%', '50%'],
+												roseType: 'area',
+												itemStyle: {
+													borderRadius: 8
+												},
+												data: data.yuqingzhuizong[0].jianyaofenxi[5].shijianzhonglei_bingtu
+											}
+										]
+									}
+
+							);
+
+						var fankuifangfa = echarts.init(document.getElementById("method_pie"));
+							fankuifangfa.setOption({
+									tooltip: {
+									    formatter: '{b}<br/>共：{c}（篇）',
+									},
+									legend: {
+										left: '10px',
+										top: 'center',
+										padding:[0,500,0,0],
+									},
+									toolbox: {
+										show: true,
+										feature: {
+											mark: {show: true},
+											dataView: {show: true, readOnly: false},
+											// restore: {show: true},
+											saveAsImage: {show: true}
+										}
+									},
+									series: [
+										{
+											type: 'pie',
+											// radius: [30, 120],
+											center: ['60%', '50%'],
+											// roseType: 'area',
+											// itemStyle: {
+											// 	borderRadius: 8
+											// },
+											data: data.yuqingzhuizong[1].shijianbaodao_bingtu
+										}
+									]
+								}
+							);
+
+						var zhutifenlei = echarts.init(document.getElementById("zhutifenlei_bar"));
+							zhutifenlei.setOption(
+								{
+									width:480,
+									height:200,
+									tooltip: {
+										trigger: 'axis',
+									    formatter: '主题：{b}<br>共 {c}篇',
+									},
+									toolbox: {
+										show: true,
+										feature: {
+											mark: {show: true},
+											dataView: {show: true, readOnly: false},
+											restore: {show: true},
+											magicType: {type: ['line', 'bar']},
+											saveAsImage: {show: true}
+										}
+									},
+									xAxis: {
+										type: 'category',
+										data: data.yuqingzhuizong[2].shijianyingxiang_zhuxingtu[0].xAxis.data,
+										axisLabel: {
+											 		// 标签隔多少个展示一个
+												   interval:0,
+												   rotate:20
+										}
+									},
+									yAxis: {
+										type: 'value'
+									},
+									color: 'rgb(255,140,0)',
+									barWidth:35,
+									series: [{
+										data: data.yuqingzhuizong[2].shijianyingxiang_zhuxingtu[1].series[0].data,
+										type: 'bar'
+									}]
+								}
+							);
+						var guanzhudu = echarts.init(document.getElementById("guanzhudu_yibiaopan"));
+							guanzhudu.setOption({
+
+									series: [{
+										type: 'gauge',
+										radius:'140%',
+										center:['50%','88%'],
+										startAngle: 180,
+										endAngle: 0,
+										min: 0,
+										max: 1,
+										splitNumber: 8,
+										axisLine: {
+											lineStyle: {
+												width: 6,
+												color: [
+													[1/3, 'rgb(159,224,128)'],
+													[2/3, 'rgb(245,160,0)'],
+													[1, 'rgb(248,82,82)'],
+												]
+											}
+										},
+										pointer: {
+											icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+											length: '12%',
+											width: 20,
+											offsetCenter: [0, '-60%'],
+											itemStyle: {
+												color: 'orange'
+											}
+										},
+										axisTick: {
+											length: 12,
+											lineStyle: {
+												color: 'auto',
+												width: 2
+											}
+										},
+										splitLine: {
+											length: 20,
+											lineStyle: {
+												color: 'auto',
+												width: 5
+											}
+										},
+										axisLabel: {
+											color: '#464646',
+											fontSize: 20,
+											distance: -60,
+											formatter: function (value) {
+												if (value === 0.125) {
+													return '低';
+												}
+												else if (value === 0.5) {
+													return '中';
+												}
+												else if (value === 0.875) {
+													return '高';
+												}
+											}
+										},
+										title: {
+											offsetCenter: [0, '-25%'],
+											fontSize: 35
+										},
+										detail: {
+											fontSize: 50,
+											offsetCenter: [0, '0%'],
+											valueAnimation: true,
+											formatter: function (value) {
+												return Math.round(value * 100) + '%';
+											},
+											color: 'red'
+										},
+										data: [{
+											value: data.yuqingzhuizong[3].yibiaotu.data[0].value,
+											name: '市民关注度'
+										}]
+									}]
+								}
+							);
+
+						var time_tongji = echarts.init(document.getElementById("time_tongji_bar"));
+							time_tongji.setOption(
+								{
+									height:180,
+									width:500,
+								grid:{
+									   x:35,
+									   y:25,
+									   x2:20,
+									   y2:10
+									  },
+									tooltip: {
+										trigger: 'axis',
+										formatter: '处理时间：{b}<br>共 {c}篇',
+									},
+									toolbox: {
+										show: true,
+										feature: {
+											mark: {show: true},
+											dataView: {show: true, readOnly: false},
+											restore: {show: true},
+											magicType: {type: ['line', 'bar']},
+											saveAsImage: {show: true}
+										}
+									},
+									xAxis: {
+										type: 'category',
+										data: data.yuqingzhuizong[4].zhengfufankui[1].time_zhuxingtu[0].yAxis.data,
+										axisLabel: {
+											 		// 标签隔多少个展示一个
+												   interval:0,
+												   rotate:30
+										}
+									},
+									yAxis: {
+										type: 'value',
+										splitLine:{
+										　　　　show:false
+										　　}
+									},
+									barWidth:15,
+									series: [{
+										color: 'rgb(115,239,103)',
+										center:['50%','50%'],
+										data: data.yuqingzhuizong[4].zhengfufankui[1].time_zhuxingtu[1].series[0].data,
+										type: 'bar'
+									}, {
+									color:"orange",
+									data: data.yuqingzhuizong[4].zhengfufankui[1].time_zhuxingtu[1].series[0].data,
+									type: 'line',
+									smooth:true,
+								}
+
+									]
+								}
+							);
+
+						var time_tongji_pie = echarts.init(document.getElementById("time_tongji_pie"));
+							time_tongji_pie.setOption({
+										// legend: {
+										// 	top: 'bottom'
+										// },
+										tooltip: {
+										    formatter: '处理时间：{b}<br/>共：{c}（篇）',
+										},
+										toolbox: {
+											top:20,
+											show: true,
+											feature: {
+												mark: {show: true},
+												dataView: {show: true, readOnly: false},
+												// restore: {show: true},
+												saveAsImage: {show: true}
+											}
+										},
+										series: [
+											{
+												type: 'pie',
+												top:25,
+												radius: [30, 120],
+												center: ['50%', '50%'],
+												roseType: 'area',
+												itemStyle: {
+													borderRadius: 8
+												},
+												data: data.yuqingzhuizong[4].zhengfufankui[2].time_bingtu
+											}
+										]
+									}
+
+							);
+
+					}, 'json');
+
+			});
+		</script>
+
+	</head>
+	<body>
+		<div class="w" id="w">
+			<div class="main">
+				<div id="init"></div>
+				<!-- /* ==================================================第1部分start */ -->
+				<div class="init_block">
+					<div class="top">
+						<span class="name">关键词 ：</span>
+						<span class="key_word" id="key_word">
+
+						</span>
+					</div>
+					<div class="tip_1">
+						<span>简要分析统计</span>
+					</div>
+					<div class="in_main_block_1">
+						<div class="one_left">
+							<div class="one">
+								<span>
+									事件时间/地区
+								</span>
+								<ul>
+									<li>
+										<div class="div_one" style="background-color: rgb(255,97,72);">首次事件时间/地区</div>
+										<span id="first_time_location"></span>
+									</li>
+									<li>
+										<div class="div_one" style="background-color: rgb(51,163,117);">最后事件时间/地区</div>
+										<span id="last_time_location"></span>
+									</li>
+								</ul>
+							</div>
+							<div class="one">
+								<span>
+									事件爆发高点
+								</span>
+								<ul>
+									<li>
+										<div class="div_one" style="background-color: red;">事件集中月份</div>
+										<span id="shijianbaofa_time"></span>
+									</li>
+									<li>
+										<div class="div_one" style="background-color: #54C1FD;">相关事件数量</div>
+										<span id="shijianbaofa_num"></span>
+									</li>
+								</ul>
+							</div>
+							<div class="three">
+								<span>
+									事件报道总计
+								</span>
+								<ul>
+									<li>
+										<div class="div_two">建议</div>
+										<span id="jianyi_num"></span>
+									</li>
+									<li>
+										<div class="div_two" style="background-color: red;">投诉</div>
+										<span id="tousu_num"></span>
+									</li>
+									<li>
+										<div class="div_two" style="background-color: #CD853F;">举报</div>
+										<span id="jubao_num"></span>
+										</li>
+									<li>
+										<div class="div_two" style="background-color: burlywood;">咨询</div>
+										<span id="zixun_num"></span>
+										</li>
+									<li>
+										<div class="div_two" style="background-color: #73EF67;">求助</div>
+										<span id="qiuzhu_num"></span>
+										</li>
+									<li>
+										<div class="div_two" style="background-color: darkorange;">其他</div>
+										<span id="qita_num"></span>
+										</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="one_right">
+							<div class="first">
+								<div class="first_title">
+									事件发生时间走势图
+								</div>
+								<div id="shijianjieshou_zhexian">
+
+								</div>
+								<div class="left">
+									<div class="left_tip">
+										事件类型统计
+									</div>
+									<div id="shijianzhonglei_pie">
+
+									</div>
+								</div>
+
+								<div class="right">
+									<div class="right_tip">
+										接收单位统计
+									</div>
+									<div id="shijiandafu_loudou">
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /* ==================================================第2部分start */ -->
+				<div class="init_block">
+					<div class="tip_2">
+						<span>事件分析</span>
+					</div>
+					<div class="in_main_block_2">
+						<div class="two_left">
+							<div class="two_left_title">
+								来源渠道统计
+							</div>
+							<div id="method_pie">
+
+							</div>
+						</div>
+
+						<div class="two_right">
+							<div class="two_right_title">
+								事件主题分类
+							</div>
+							<div id="zhutifenlei_bar">
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /* ==================================================第3部分start */ -->
+				<div class="init_block">
+					<div class="tip_2">
+						<span>网民关注分析</span>
+					</div>
+
+					<div class="in_main_block_2">
+						<div class="three_left">
+							<div class="three_left_title">
+								市民关注度
+							</div>
+							<div id="guanzhudu_yibiaopan">
+
+							</div>
+						</div>
+
+						<div class="three_right">
+						<span>由事件爆发月份的数量占该月总文章数量的比例，可以得出市民对此事件的关注程度</span>
+						</div>
+					</div>
+				</div>
+				<!-- /* ==================================================第4部分start */ -->
+				<div class="init_block">
+					<div class="tip_2">
+						<span>政府问题处理分析</span>
+					</div>
+					
+					<div class="in_main_block_2">
+						<div class="four_left">
+							<div class="four_left_title">
+								政府处理
+							</div>
+							<div class="chuli_time">
+								<ul>
+									<li>
+										<div class="time" style="background-color: #CD853F;">最短处理用时：
+										<span id="short_time"></span>
+										</div>	
+									</li>
+									<li>
+										<div class="time" style="background-color: burlywood;">最长处理用时：
+										<span id="long_time" style="color: red;"></span>
+										</div>	
+									</li>
+									<li>
+										<div class="time" style="background-color: #73EF67;">平均处理用时：
+										<span id="mean_time"></span>
+										</div>	
+									</li>
+									<li>
+										<div class="time" style="background-color: rgb(84,193,253);">&emsp;市民满意度：
+										<span id="manyidu" style="color: green"></span>
+										</div>	
+									</li>
+								</ul>
+							</div>
+						</div>
+						
+						<div class="four_middle">
+							<div class="four_middle_title">市民反馈处理时间统计</div>
+							<div id="time_tongji_bar"></div>
+						</div>
+						
+						<div class="four_right">
+							<div id="time_tongji_pie"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

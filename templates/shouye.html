@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- 		<script src="../static/js/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/js/echarts.min.js"></script> -->
+		<script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
+		<script src="../static/js/echarts-wordcloud.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_2509369_rod9ziqr66.css"/>
+		<style type="text/css">
+			html,
+			body{
+				height: 100%;
+				
+			}
+			*{
+				margin: 0;
+				padding: 0;
+				text-decoration: none;
+			}
+			
+			li{
+				list-style: none;
+			}
+			
+			/* 设置滚动条样式, 宽度0 */
+			::-webkit-scrollbar{
+				width: 0px;
+			}
+			
+			.w{
+				width: 100%;
+				height: 900px;
+				text-align: center;
+				/* background-color: pink; */
+			}
+			
+			.main{
+				width: 100%;
+				height: auto;
+				/* background-color: #00A4FF; */
+			}
+			/* =============================================顶部导航栏 */
+			.navbar{
+				position: relative;
+				width: auto;
+				height: 250px;
+				background-color: #FFFFFF;
+				margin-bottom: 20px;
+			}
+			
+			.navbar h2{
+				display: inline-block;
+				width: 100%;
+				height: 40px;
+				/* background-color: gold; */
+				text-align: left;
+				padding-left: 30px;
+				line-height: 45px;
+				font-size: 18px;
+			}
+			
+			.navbar h2 span{
+				display: inline-block;
+				/* background-color: #3D377F; */
+				font-size: 10px;
+				font-weight: 100;
+				color: #2D3338;
+			}
+			
+			.navbar_click{
+				/* background-color: #008000; */
+				width: auto;
+				height: 180px;
+				padding-bottom:20px;
+			}
+			
+			.icon-yuqing{
+				position: absolute;
+				left: 60px;
+				font-size: 50px
+			}
+			
+			.one{
+				display: inline-block;
+				position: absolute;
+				width: 350px;
+				height: 90px;
+				left: 30px;
+				box-sizing: border-box;
+				border: 2px transparent solid;
+				background-color: rgb(47,173,231);
+				color: #FFFFFF;
+				font-size: 20px;
+				line-height: 90px;
+			}
+			
+			.one:hover{
+				transition: 0.1s;
+				border: 2px lightslategray solid;
+			}
+			
+			
+			.icon-zonglan{
+				position: absolute;
+				left: 60px;
+				font-size: 50px
+			}
+			
+			.two{
+				display: inline-block;
+				position: absolute;
+				width: 350px;
+				height: 90px;
+				bottom: 20px;
+				left: 30px;
+				box-sizing: border-box;
+				border: 2px transparent solid;
+				background-color: rgb(41,186,127);
+				color: #FFFFFF;
+				font-size: 20px;
+				line-height: 90px;
+			}
+			
+			.two:hover{
+				transition: 0.1s;
+				border: 2px lightslategray solid;
+			}
+			
+			
+			.icon-zhuizong{
+				position: absolute;
+				left: 50px;
+				font-size: 50px
+			}
+			
+			.three{
+				display: inline-block;
+				position: absolute;
+				width: 400px;
+				height: 190px;
+				left: 390px;
+				box-sizing: border-box;
+				border: 2px transparent solid;
+				background-color: rgb(220,92,55);
+				color: #FFFFFF;
+				font-size: 35px;
+				line-height: 190px;
+			}
+			
+			.three:hover{
+				transition: 0.1s;
+				border: 2px lightslategray solid;
+			}
+			
+
+
+			.icon-xinxi{
+				position: absolute;
+				left: 20px;
+				font-size: 50px
+			}
+
+			.four{
+				display: inline-block;
+				position: absolute;
+				width: 300px;
+				height: 190px;
+				right: 305px;
+				box-sizing: border-box;
+				border: 2px transparent solid;
+				background-color: rgb(255,187,78);
+				color: #FFFFFF;
+				font-size: 35px;
+				line-height: 190px;
+			}
+
+			.four:hover{
+				transition: 0.1s;
+				border: 2px lightslategray solid;
+			}
+
+
+			.icon-lianjie{
+				position: absolute;
+				left: 20px;
+				font-size: 45px
+			}
+
+			.five{
+				display: inline-block;
+				position: absolute;
+				width: 265px;
+				height: 190px;
+				right: 30px;
+				box-sizing: border-box;
+				border: 2px transparent solid;
+				background-color: rgb(53,190,136);
+				color: #FFFFFF;
+				font-size:30px;
+				line-height: 190px;
+			}
+
+			.five:hover{
+				transition: 0.1s;
+				border: 2px lightslategray solid;
+			}
+
+
+/* 			.icon-yuce{
+				position: absolute;
+				left: 10px;
+				font-size: 50px
+			}
+
+			.six{
+				display: inline-block;
+				position: absolute;
+				width: 265px;
+				height: 90px;
+				bottom: 20px;
+				right: 30px;
+				box-sizing: border-box;
+				border: 2px transparent solid;
+				background-color: rgb(47,96,173);
+				color: #FFFFFF;
+				font-size: 20px;
+				line-height: 90px;
+			}
+
+			.six:hover{
+				transition: 0.1s;
+				border: 2px lightslategray solid;
+			} */
+
+
+			/* ================================第一个大盒子 */
+			.first_div{
+				width: auto;
+				height: 600px;
+				padding: 0 30px;
+				border: 2px rgb(201,201,201) solid;
+				background-color: #FFFFFF;
+			}
+
+			.left{
+				position: relative;
+				display: inline-block;
+				padding-top: 30px;
+				box-sizing: border-box;
+				border-right: 2px rgb(201,201,201) solid;
+				float: left;
+				width: 30%;
+				height: 100%;
+				/* background-color: #3D377F; */
+			}
+
+			.right{
+				display: inline-block;
+				float: left;
+				width: 70%;
+				height: 100%;
+				/* background-color: #CD853F; */
+			}
+
+			.rader{
+				display: inline-block;
+				position: absolute;
+				left: 0px;
+				width: 150px;
+				height: 150px;
+				background-color: #008000;
+			}
+
+			.rader img{
+				width: 100%;
+				height: 100%;
+			}
+
+			.tip{
+				display: inline-block;
+				position: absolute;
+				padding-top: 10px;
+				top: 180px;
+				left: 0px;
+				width: 150px;
+				height: 50px;
+				/* background-color: #008000; */
+			}
+
+			.tip span{
+				display: inline-block;
+				position: absolute;
+				width: 100px;
+				left: 50%;
+				margin-left: -50px;
+				top: 30px;
+				color: #008000;
+				/* background-color: #00A4FF; */
+				font-weight: 700;
+			}
+
+			.today{
+				position: absolute;
+				right: 0;
+				width: 215px;
+				height: 210px;
+				padding:0 20px;
+				/* background-color: #00A4FF; */
+			}
+
+			.today > span{
+				display: block;
+				width: auto;
+				/* padding-left: 20px; */
+				/* background-color: #20FF4D; */
+				text-align: left;
+				color: #008000;
+				font-size: 30px;
+			}
+
+			.today_left{
+				float: left;
+				width: 48%;
+				height: 80%;
+				/* background-color: #008000; */
+			}
+
+			.today_right{
+				float: right;
+				width: 48%;
+				height: 80%;
+				/* background-color: #008000; */
+			}
+
+			.today li{
+				margin-top: 20px;
+				height: 30px;
+				background-color: rgb(235,235,235);
+				border: 1px rgb(201,201,201) solid;
+				border-radius: 4px;
+				line-height: 30px;
+			}
+
+			.div_six{
+				display: inline-block;
+				float: left;
+				width: 40px;
+				height: 30px;
+				background-color:#6B45BC;
+				font-size: 17px;
+				color: #FFFFFF;
+				border-radius: 4px;
+			}
+
+			.div_six_span{
+				display: inline-block;
+				float: left;
+				width: 58px;
+				height: 100%;
+				font-size: 15px;
+				/* background-color: #000000; */
+				color: gray;
+
+			}
+
+			.today_reci{
+				margin-top: 210px;
+				margin-right: 20px;
+				width: auto;
+				height: 360px;
+				/* background-color: #008000; */
+			}
+
+			.today_reci>span{
+				display: block;
+				width: 100%;
+				height: 30px;
+				margin-bottom: 10px;
+				/* background-color: #00A4FF; */
+				line-height: 30px;
+				font-size: 25px;
+				font-weight: 600;
+				font-family: "宋体";
+			}
+
+			#reci{
+				width: 100%;
+				height: 320px;
+				/* background-color: #20FF4D; */
+			}
+
+			.right_top{
+				position: relative;
+				width: 100%;
+				height: 50%;
+				/* background-color: #008000; */
+			}
+
+			.right_top_left{
+				position: absolute;
+				left: 0;
+				display: inline-block;
+				box-sizing: border-box;
+				border-right: 3px rgb(235,235,235) solid;
+				width: 50%;
+				height: 100%;
+				/* background-color: #20FF4D; */
+			}
+
+			.right_top_left_title{
+				display: inline-block;
+				width: 100%;
+				height: 30px;
+				/* background-color: gold; */
+				font-size: 20px;
+				line-height: 30px;
+				font-family: "宋体";
+			}
+
+			#wentileixin_pie{
+				display: inline-block;
+				width: 100%;
+				height: 270px;
+				/* background-color: gold; */
+
+			}
+
+			.right_top_right{
+				position: absolute;
+				right: 0;
+				display: inline-block;
+				width: 50%;
+				height: 100%;
+			}
+
+			.right_top_right_title{
+				display: inline-block;
+				width: 100%;
+				height: 30px;
+				/* background-color: gold; */
+				font-size: 20px;
+				line-height: 30px;
+				font-family: "宋体";
+			}
+
+			#yuqinglaiyuan_bar{
+				display: inline-block;
+				width: 100%;
+				height: 270px;
+				/* background-color: gold; */
+			}
+
+			.right_bottom{
+				position: relative;
+				width: 100%;
+				height: 50%;
+				box-sizing: border-box;
+				border-top: 3px rgb(235,235,235) solid;
+				/* background-color: #008000; */
+				text-align: left;
+			}
+
+
+
+			.right_bottom_left{
+				position: relative;
+				display: inline-block;
+				left: 30px;
+				width: 200px;
+				height: 100%;
+				border-right: 3px rgb(235,235,235) solid;
+				/* background-color: #00A4FF; */
+			}
+
+			.right_bottom_left_title{
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				width: 50px;
+				height: 100%;
+				/* background-color: #20FF4D; */
+				font-size: 30px;
+				/* line-height: 300px; */
+				font-family: "宋体";
+			}
+
+			.right_bottom_left_neirong{
+				width: 200px;
+				height: 100%;
+				/* background-color: #3D377F; */
+			}
+
+			.neirong{
+				position: absolute;
+				right: 0;
+				width: 130px;
+				height: 300px;
+				/* background-color: #00A4FF; */
+			}
+
+			.neirong li{
+				width: 100px;
+				height: 30px;
+				margin-top: 5px;
+				margin-bottom: 18px;
+				background-color: rgb(235,235,235);
+				border: 1px rgb(201,201,201) solid;
+				border-radius: 4px;
+				line-height: 30px;
+			}
+
+			.div_six_1{
+				display: inline-block;
+				float: left;
+				width: 40px;
+				height: 30px;
+				background-color:#6B45BC;
+				font-size: 17px;
+				color: #FFFFFF;
+				text-align: center;
+				border-radius: 4px;
+			}
+
+			.div_six_span_1{
+				float: left;
+				display: inline-block;
+				width: 58px;
+				height: 100%;
+				font-size: 15px;
+				text-align: center;
+				/* background-color: #000000; */
+				color: gray;
+
+			}
+
+
+			.right_bottom_right{
+				position: absolute;
+				right: 0;
+				display: inline-block;
+				width: 700px;
+				height: 298px;
+				/* background-color: gold; */
+			}
+
+			.right_bottom_right_title{
+				display: inline-block;
+				width: 100px;
+				height: 300px;
+				/* background-color: #008000; */
+				font-size: 20px;
+				line-height: 300px;
+				text-align: center;
+				font-weight: 700;
+
+			}
+
+			.right_bottom_right_title span{
+				display: inline-block;
+				width: 100px;
+				/* background-color: #00A4FF; */
+			}
+
+			#shangzhou_reci{
+				display: inline-block;
+				position: absolute;
+				right: 0;
+				width: 600px;
+				height: 297px;
+				/* background-color: #00A4FF; */
+			}
+		</style>
+
+		<script type="text/javascript">
+			$(function(){
+				$("#two").click(function(){
+					$(window.parent.$("#nav").contents().find("#yuqingzonglan .title").trigger("click"));
+					$(window.parent.$("#nav").contents().find("#yuqingzonglan").addClass("click"));
+					$(window.parent.$("#nav").contents().find("#first").removeClass("click"));
+				});
+
+				$("#three").click(function(){
+					$(window.parent.$("#nav").contents().find("#search_click .title").trigger("click"));
+					$(window.parent.$("#nav").contents().find("#search_click").addClass("click"));
+					$(window.parent.$("#nav").contents().find("#first").removeClass("click"));
+				});
+
+				$("#four").click(function(){
+					$(window.parent.$("#nav").contents().find("#yuqingxinxi .title").trigger("click"));
+					$(window.parent.$("#nav").contents().find("#yuqingxinxi").addClass("click"));
+					$(window.parent.$("#nav").contents().find("#first").removeClass("click"));
+				});
+
+
+				$.get("shouye.json",function(data){
+
+					num = data.shouyeshuju[0].benzhoushuju[0].baodaotongji[2].tousu;
+					// window.alert(num);
+					if (parseInt(num)<5){
+						$("#chengdu").css("color","blue");
+						$("#chengdu").text("").append("轻度警情");
+					}else if(parseInt(num)>=5 && parseInt(num)<15){
+						$("#chengdu").css("color","green");
+						$("#chengdu").text("").append("中度警情");
+					}else if(parseInt(num)>=15 && parseInt(num)<=30){
+						$("#chengdu").css("color","orange");
+						$("#chengdu").text("").append("重度警情");
+					}else if(parseInt(num)>30){
+						$("#chengdu").css("color","red");
+						$("#chengdu").text("").append("特重警情");
+					}
+
+
+
+					// window.alert(data.shouyeshuju[0].benzhoushuju[0].baodaotongji[5].jianyi);
+					$("#jianyi").text("").append(data.shouyeshuju[0].benzhoushuju[0].baodaotongji[5].jianyi);
+					$("#zixun").text("").append(data.shouyeshuju[0].benzhoushuju[0].baodaotongji[0].zixun);
+					$("#qita").text("").append(data.shouyeshuju[0].benzhoushuju[0].baodaotongji[1].qita);
+					$("#tousu").text("").append(data.shouyeshuju[0].benzhoushuju[0].baodaotongji[2].tousu);
+					$("#qiuzhu").text("").append(data.shouyeshuju[0].benzhoushuju[0].baodaotongji[3].qiuzhu);
+					$("#jubao").text("").append(data.shouyeshuju[0].benzhoushuju[0].baodaotongji[4].jubao);
+
+					$("#jianyi_1").text("").append(data.shouyeshuju[1].shangzhoushuju[0].baodaotongji[5].jianyi);
+					$("#zixun_1").text("").append(data.shouyeshuju[1].shangzhoushuju[0].baodaotongji[0].zixun);
+					$("#qita_1").text("").append(data.shouyeshuju[1].shangzhoushuju[0].baodaotongji[1].qita);
+					$("#tousu_1").text("").append(data.shouyeshuju[1].shangzhoushuju[0].baodaotongji[2].tousu);
+					$("#qiuzhu_1").text("").append(data.shouyeshuju[1].shangzhoushuju[0].baodaotongji[3].qiuzhu);
+					$("#jubao_1").text("").append(data.shouyeshuju[1].shangzhoushuju[0].baodaotongji[4].jubao);
+
+
+					var wentileixin = echarts.init(document.getElementById("wentileixin_pie"));
+						wentileixin.setOption({
+									// legend: {
+									// 	top: 'bottom'
+									// },
+									tooltip: {
+									    formatter: '{b}<br/>共：{c}（条）',
+									},
+									toolbox: {
+										show: true,
+										feature: {
+											mark: {show: true},
+											dataView: {show: true, readOnly: false},
+											// restore: {show: true},
+											saveAsImage: {show: true}
+										}
+									},
+									series: [
+										{
+											type: 'pie',
+											top:10,
+											radius: [30, 100],
+											center: ['50%', '50%'],
+											roseType: 'area',
+											itemStyle: {
+												borderRadius: 8
+											},
+											data: data.shouyeshuju[0].benzhoushuju[1].shijianzhonglei_bingtu
+										}
+									]
+								}
+
+						);
+
+						// window.alert(data.shouyeshuju[0].benzhoushuju[2].fangfa_zhuxingtu[0].yAxis.data);
+						// window.alert(data.shouyeshuju[0].benzhoushuju[2].fangfa_zhuxingtu[1].series[0].data);
+					var yuqinglaiyuan = echarts.init(document.getElementById("yuqinglaiyuan_bar"));
+						yuqinglaiyuan.setOption(
+							{
+								// width:480,
+								// height:200,
+								tooltip: {
+									trigger: 'axis',
+									formatter: '主题：{b}<br>共 {c}篇',
+								},
+								toolbox: {
+									show: true,
+									feature: {
+										mark: {show: true},
+										dataView: {show: true, readOnly: false},
+										restore: {show: true},
+										magicType: {type: ['line', 'bar']},
+										saveAsImage: {show: true}
+									}
+								},
+								xAxis: {
+									type: 'category',
+									data: data.shouyeshuju[0].benzhoushuju[2].fangfa_zhuxingtu[0].yAxis.data,
+									axisLabel: {
+												// 标签隔多少个展示一个
+											   interval:0,
+											   rotate:20
+									}
+								},
+								yAxis: {
+									type: 'value'
+								},
+								color: 'rgb(145,204,117)',
+								barWidth:35,
+								series: [{
+									data: data.shouyeshuju[0].benzhoushuju[2].fangfa_zhuxingtu[1].series[0].data,
+									type: 'bar'
+								}]
+							}
+						);
+
+						// window.alert(data.shouyeshuju[0].benzhoushuju[3].ciyunshuju);
+					var benzhou_reci = echarts.init(document.getElementById('reci'));
+						 benzhou_reci.setOption(
+						{
+						tooltip: {},
+						series: [ {
+								 type: 'wordCloud',
+								 gridSize: 2,
+								 //字体大小范围
+								 sizeRange: [10, 50],
+								 //字体旋转角度范围
+								 rotationRange: [-90, 90],
+								 //词云图形状
+								 shape: 'triangle',
+								 left: 'center',
+								 top: 'center',
+								 right: null,
+								 bottom: null,
+
+								 //词云图长宽
+								 width: '100%',
+								 height: '100%',
+								 // 是否画超出范围的词
+								 // drawOutOfBound: true,
+								 textStyle: {
+									 //字体随机颜色
+									 normal: {
+										 color: function () {
+											 return 'rgb(' + [
+												 Math.round(Math.random() * 200),
+												 Math.round(Math.random() * 150),
+												 Math.round(Math.random() * 200)
+											 ].join(',') + ')';
+										 }
+									 },
+									 emphasis: {
+										 //阴影距离
+										 shadowBlur: 8,
+										 //阴影颜色
+										 shadowColor: '#333'
+									 }
+								 },
+								 data:data.shouyeshuju[0].benzhoushuju[3].ciyunshuju
+						} ]
+				 });
+
+
+				 var shangzhou_reci = echarts.init(document.getElementById('shangzhou_reci'));
+					 shangzhou_reci.setOption(
+					{
+					tooltip: {},
+					series: [ {
+							 type: 'wordCloud',
+							 gridSize: 2,
+							 //字体大小范围
+							 sizeRange: [10, 50],
+							 //字体旋转角度范围
+							 rotationRange: [-90, 90],
+							 //词云图形状
+							 shape: 'cicle',
+							 left: 'center',
+							 top: 'center',
+							 right: null,
+							 bottom: null,
+
+							 //词云图长宽
+							 width: '100%',
+							 height: '100%',
+							 // 是否画超出范围的词
+							 // drawOutOfBound: true,
+							 textStyle: {
+								 //字体随机颜色
+								 normal: {
+									 color: function () {
+										 return 'rgb(' + [
+											 Math.round(Math.random() * 200),
+											 Math.round(Math.random() * 150),
+											 Math.round(Math.random() * 200)
+										 ].join(',') + ')';
+									 }
+								 },
+								 emphasis: {
+									 //阴影距离
+									 shadowBlur: 8,
+									 //阴影颜色
+									 shadowColor: '#333'
+								 }
+							 },
+							 data:data.shouyeshuju[1].shangzhoushuju[1].ciyunshuju
+					} ]
+				 });
+
+
+
+				},'json');
+			});
+		</script>
+	</head>
+	<body>
+		<div class="w">
+			<div class="main">
+				<div class="navbar">
+					<div class="navbar_title">
+						<h2>首页导航<span>(点击可跳转相应板块)</span></h2>
+					</div>
+
+					<div class="navbar_click">
+						<a href="#first_div" class="one">
+							<div class="in_one">
+								<i class="iconfont icon-yuqing"></i>
+								本周舆情
+							</div>
+						</a>
+						<a href="#" class="two" id="two">
+							<div class="in_one">
+								<i class="iconfont icon-zonglan"></i>
+								舆情总览
+							</div>
+						</a>
+						<a href="#" class="three" id="three">
+							<div class="in_one">
+								<i class="iconfont icon-zhuizong"></i>
+								舆情追踪
+							</div>
+						</a>
+						<a href="#" class="four" id="four">
+							<div class="in_one">
+
+								<i class="iconfont icon-xinxi"></i>
+								舆情信息
+							</div>
+						</a>
+						<a href="http://www.wuhu.gov.cn/" class="five" id="five">
+							<div class="in_one">
+								<i class="iconfont icon-lianjie"></i>
+								网站链接
+							</div>
+						</a>
+<!-- 						<a href="#" class="six" id="six">
+							<div class="in_one">
+								<i class="iconfont icon-yuce"></i>
+								舆情预测
+							</div>
+						</a> -->
+					</div>
+				</div>
+
+				<div class="first_div" id="first_div">
+					<div class="left">
+						<div class="rader">
+							<img src="../static/img/rader.jpg" >
+						</div>
+						<div class="tip">
+							预警级别
+							<span id="chengdu">一般</span>
+						</div>
+
+						<div class="today">
+							<span>本周舆情</span>
+							<ul class="today_left">
+								<li>
+									<div class="div_six">建议</div>
+									<span id="jianyi" class="div_six_span"></span>
+								</li>
+								<li>
+									<div class="div_six" style="background-color: red;">投诉</div>
+									<span id="tousu" class="div_six_span" style="color: red;"></span>
+									</li>
+								<li>
+									<div class="div_six" style="background-color: #CD853F;">举报</div>
+									<span id="jubao" class="div_six_span"></span>
+								</li>
+							</ul>
+							<ul class="today_right">
+								<li>
+									<div class="div_six" style="background-color: burlywood;">咨询</div>
+									<span id="zixun" class="div_six_span"></span>
+								</li>
+								<li>
+									<div class="div_six" style="background-color: #73EF67;">求助</div>
+									<span id="qiuzhu" class="div_six_span"></span>
+									</li>
+								<li>
+									<div class="div_six" style="background-color: darkorange;">其他</div>
+									<span id="qita" class="div_six_span"></span>
+								</li>
+							</ul>
+						</div>
+						
+						<div class="today_reci">
+							<span>本周热词</span>
+							<div id="reci">
+								
+							</div>
+						</div>
+					</div>
+					<div class="right">
+						<div class="right_top">
+							<div class="right_top_left">
+								<div class="right_top_left_title">舆情类型统计</div>
+								<div id="wentileixin_pie"></div>
+							</div>
+							
+							<div class="right_top_right">
+								<div class="right_top_right_title">舆情来源统计</div>
+								<div id="yuqinglaiyuan_bar"></div>
+							</div>
+						</div>
+						
+						<div class="right_bottom">
+							<div class="right_bottom_left">
+								<div class="right_bottom_left_title">
+									&emsp;上周舆情
+								</div>
+								<div class="right_bottom_left_neirong">
+									<ul class="neirong">
+										<li>
+											<div class="div_six_1" style="background-color: rgb(107,69,188);">建议</div>
+											<span id="jianyi_1" class="div_six_span_1"></span>
+										</li>
+										<li>
+											<div class="div_six_1" style="background-color: rgb(222,184,135);">咨询</div>
+											<span id="zixun_1" class="div_six_span_1"></span>
+										</li>
+										<li>
+											<div class="div_six_1" style="background-color: rgb(255,0,0);">投诉</div>
+											<span id="tousu_1" class="div_six_span_1"></span>
+										</li>
+										<li>
+											<div class="div_six_1" style="background-color: rgb(115,239,103);">求助</div>
+											<span id="qiuzhu_1" class="div_six_span_1"></span>
+										</li>
+										<li>
+											<div class="div_six_1" style="background-color: rgb(205,133,63);">举报</div>
+											<span id="jubao_1" class="div_six_span_1"></span>
+										</li>
+										<li>
+											<div class="div_six_1" style="background-color: rgb(255,140,0);">其他</div>
+											<span id="qita_1" class="div_six_span_1"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+							
+							<div class="right_bottom_right">
+								<div class="right_bottom_right_title">
+									<span>上周热词</span>
+								</div>
+							</div>
+							
+							<div id="shangzhou_reci"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
